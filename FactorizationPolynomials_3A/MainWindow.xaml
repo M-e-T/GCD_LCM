@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:FactorizationPolynomials_3A.ViewModel" 
         xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
         mc:Ignorable="d"
-          Title="НОД_НОК_3" Height="450" Width="1100">
+          Title="НОД_НОК_3" Height="450" Width="700">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
@@ -64,14 +64,6 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Background="#FFFFC90E"/>
-            <Label Content="НОД = "/>
-            <TextBox
-                Text="{Binding GCD, UpdateSourceTrigger=PropertyChanged}"
-                IsEnabled="{Binding IsTableEmpty, Mode=OneWay}"
-                Width="80" 
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                Background="#FFFFC90E"/>
             <Label Content="НОД(С, N) = "/>
             <TextBox
                 Text="{Binding GCDbyLCMandN, UpdateSourceTrigger=PropertyChanged}"
@@ -83,18 +75,23 @@
 
         </StackPanel>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Table}"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" IsReadOnly="True" Sorting="DataGrid_Sorting">
+                  IsReadOnly="True" 
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False" 
+                  CanUserReorderColumns="False" 
+                  AutoGenerateColumns="False" 
+                  Sorting="DataGrid_Sorting">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" MinWidth="50" Width="auto" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="X" Width="50" Binding="{Binding X}"/>
-                <DataGridTextColumn Header="Y" Width="50" Binding="{Binding Y}"/>
-                <DataGridTextColumn Header="Z" Width="50" Binding="{Binding Z}"/>
+                <DataGridTextColumn Header="X" Width="50" Binding="{Binding X}" CanUserSort="False"/>
+                <DataGridTextColumn Header="Y" Width="50" Binding="{Binding Y}" CanUserSort="False"/>
+                <DataGridTextColumn Header="Z" Width="50" Binding="{Binding Z}" CanUserSort="False"/>
                 <DataGridTextColumn Header="N" Width="50" Binding="{Binding N}"/>
-                <DataGridTextColumn Header="НОД (X,Y,Z)" Width="120" Binding="{Binding GCD}"/>
-                <DataGridTextColumn Header="НОК = C" Width="100" Binding="{Binding LCM}"/>
-                <DataGridTextColumn Header="НОД (НОК, N)" Width="130" Binding="{Binding GCDbyLCMandN}"/>
-                <DataGridTextColumn Header="Состав делителей N" Width="180" Binding="{Binding Dividers }" ElementStyle="{StaticResource DataGridCellTextWrap}"/>
-                <DataGridTextColumn Header="Состав делителей НОК" Width="*" Binding="{Binding DivedersLCM }" ElementStyle="{StaticResource DataGridCellTextWrap}"/>
+                <DataGridTextColumn Header="C = НОК(X,Y,Z)" Width="140" Binding="{Binding LCM}"/>
+                <DataGridTextColumn Header="Состав делителей C" Width="*" 
+                                    Binding="{Binding DivedersLCM}" 
+                                    ElementStyle="{StaticResource DataGridCellTextWrap}"
+                                    CanUserSort="False"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Command="{Binding Reset}"

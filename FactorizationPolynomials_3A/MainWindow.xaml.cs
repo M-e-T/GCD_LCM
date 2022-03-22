@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace FactorizationPolynomials_3A
 {
@@ -11,6 +12,10 @@ namespace FactorizationPolynomials_3A
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            //e.Column.SortDirection = ListSortDirection.Descending;
         }
     }
 }

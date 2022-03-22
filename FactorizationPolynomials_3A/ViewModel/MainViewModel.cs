@@ -71,21 +71,21 @@ namespace FactorizationPolynomials_3A.ViewModel
             get { return _n; }
             set {
                 _n = value;
-                Sort();
                 OnPropertyChanged();
+                Sort();
             }
         }
-        private string _GCD;
+        /*private string _GCD;
         public string GCD
         {
             get { return _GCD; }
             set
             {
                 _GCD = value;
-                Sort();
                 OnPropertyChanged();
+                Sort();
             }
-        }   
+        } */
         private string _GCDbyLCMandN;
         public string GCDbyLCMandN
         {
@@ -93,8 +93,8 @@ namespace FactorizationPolynomials_3A.ViewModel
             set
             {
                 _GCDbyLCMandN = value;
-                Sort();
                 OnPropertyChanged();
+                Sort();
             }
         }
         private RelayCommand _start;
@@ -141,7 +141,7 @@ namespace FactorizationPolynomials_3A.ViewModel
 
                     Deggre = "";
                     N = "";
-                    GCD = "";
+                    //GCD = "";
                 }, command => true));
             }
         }
@@ -149,9 +149,13 @@ namespace FactorizationPolynomials_3A.ViewModel
         {
             if (_defaultTable == null)
                 return;
-            if (string.IsNullOrWhiteSpace(N) && string.IsNullOrWhiteSpace(GCD) && string.IsNullOrWhiteSpace(GCDbyLCMandN))
+            if (string.IsNullOrWhiteSpace(N) /*&& string.IsNullOrWhiteSpace(GCD)*/ && string.IsNullOrWhiteSpace(GCDbyLCMandN))
             {
                 Table = _defaultTable;
+                for (int i = 0; i < Table.Count; i++)
+                {
+                    Table[i].Id = i + 1;
+                }
                 return;
             }
 
@@ -159,16 +163,16 @@ namespace FactorizationPolynomials_3A.ViewModel
             if (IsInt(N))
             {
                 table.AddRange(_defaultTable.Where(x => x.N == int.Parse(N)));
-                if (IsInt(GCD))
+                /*if (IsInt(GCD))
                 {
                     table = table.Where(x => x.GCD == int.Parse(GCD)).ToList();
-                }
+                }*/
                 if (IsInt(GCDbyLCMandN))
                 {
                     table = table.Where(x => x.GCDbyLCMandN == int.Parse(GCDbyLCMandN)).ToList();
                 }
             }
-            else if (IsInt(GCD))
+            /*else if (IsInt(GCD))
             {
                 table.AddRange(_defaultTable.Where(x => x.GCD == int.Parse(GCD)));
                 if (IsInt(N))
@@ -179,7 +183,7 @@ namespace FactorizationPolynomials_3A.ViewModel
                 {
                     table = table.Where(x => x.GCDbyLCMandN == int.Parse(GCDbyLCMandN)).ToList();
                 }
-            }
+            }*/
             else if(IsInt(GCDbyLCMandN))
             {
                 table = _defaultTable.Where(x => x.GCDbyLCMandN == int.Parse(GCDbyLCMandN)).ToList();
@@ -187,16 +191,16 @@ namespace FactorizationPolynomials_3A.ViewModel
                 {
                     table = table.Where(x => x.N == int.Parse(N)).ToList();
                 }
-                if (IsInt(GCD))
+                /*if (IsInt(GCD))
                 {
                     table = table.Where(x => x.GCD == int.Parse(GCD)).ToList();
-                }
-            }
-            for(int i = 0; i < table.Count; i++)
-            {
-                table[i].Id = i + 1;
+                }*/
             }
             Table = new ObservableCollection<GridItem>(table);     
+            for(int i = 0; i < Table.Count; i++)
+            {
+                Table[i].Id = i + 1;
+            }
         }
         private bool IsInt(string value)
         {
